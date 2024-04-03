@@ -26,15 +26,17 @@ jobs:
       - name: 设置 Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
           # cache: npm
 
-      - name: 构建文档
-        env:
-          NODE_OPTIONS: --max_old_space_size=8192
-        run: |
+       - name: install
+        run: 
           run: npm install
+
+      - name: build
+        run: |
           npm run docs:build
+          > src/.vuepress/dist/.nojekyll
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
